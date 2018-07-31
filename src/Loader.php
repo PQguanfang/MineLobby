@@ -7,7 +7,8 @@ use pocketmine\utils\Config;
 use pocketmine\command\Command;
 use pocketmine\command\CommandSender;
 use pocketmine\Player;
-class CmdSnooper extends PluginBase {
+
+class Loader extends PluginBase {
 	
 	public function onEnable(): void {
 		@mkdir($this->getDataFolder());
