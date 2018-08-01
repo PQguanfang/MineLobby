@@ -63,3 +63,9 @@ class Lobby extends PluginBase implements Listener {
         }
         $player->getInventory()->setItem(1, Item::get(369)->setCustomName("§eEMM §8[§cOff§8]"));
     }
+	
+	public function onBreak(BlockBreakEvent $ev) {
+		
+        $player = $ev->getPlayer();
+        $ev->setCancelled(true);
+    }
