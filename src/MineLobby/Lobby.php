@@ -40,14 +40,13 @@ class Lobby extends PluginBase implements Listener {
 
     public function onJoin(PlayerJoinEvent $ev) {
 		
-		$config = new Config($this->getDataFolder() . "config.yml", Config::YAML);
         $player = $ev->getPlayer();
         $name = $player->getName();
         $player->getInventory()->clearAll();
         $ev->setJoinMessage("§7[§9+§7]" . Color::DARK_GRAY . $name);
         $player->setFood(20);
         $player->setHealth(20);
-        $player->setGamemode(0);
+        $player->setGamemode(2);
         $player->getlevel()->addSound(new AnvilUseSound($player));
         $player->teleport($this->getServer()->getDefaultLevel()->getSafeSpawn());
         $player->sendMessage($config->get("Join"));
