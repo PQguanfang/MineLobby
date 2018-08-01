@@ -6,10 +6,12 @@ use pocketmine\plugin\PluginBase;
 use pocketmine\event\Listener;
 use pocketmine\level\Position;
 use pocketmine\level\Level;
+use pocketmine\utils\TextFormat;
 use pocketmine\Player;
 use pocketmine\entity\Entity;
 use pocketmine\math\Vector3;
 use pocketmine\event\player\PlayerMoveEvent;
+use pocketmine\event\entity\ExplosionPrimeEvent;
     
 class Safe extends PluginBase implements Listener{
 
@@ -25,3 +27,7 @@ class Safe extends PluginBase implements Listener{
             }
         }
     }
+
+        public function onExplosionPrime(ExplosionPrimeEvent $event){
+	     	$event->setBlockBreaking(false);
+	}
