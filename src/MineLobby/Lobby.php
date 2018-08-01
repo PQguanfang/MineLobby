@@ -92,3 +92,19 @@ class Lobby extends PluginBase implements Listener {
             $ev->setCancelled(true);
         }
     }
+	
+    public function onInteract(PlayerInteractEvent $ev){
+        $player = $ev->getPlayer();
+        $item = $ev->getItem();
+
+	if($item->getCustomName() == "§a选择玩法"){
+	    $player->getInventory()->clearAll();
+            $player->getInventory()->setSize(9);
+            $player->getInventory()->setItem(0, Item::get(138)->setCustomName("§a纯净生存"));
+            $player->getInventory()->setItem(1, Item::get(2)->setCustomName("§6模组生存"));
+            $player->getInventory()->setItem(2, Item::get(35)->setCustomName("§1RPG§4生存"));
+            $player->getInventory()->setItem(6, Item::get(355, 14)->setCustomName("§c小游戏"));
+            $player->getInventory()->setItem(8, Item::get(267)->setCustomName("§4创造地皮"));
+            $player->getInventory()->setItem(7, Item::get(399)->setCustomName("§2返回主城"));
+            $player->getInventory()->setItem(4, Item::get(351, 1)->setCustomName("§c返回上一级"));
+		
