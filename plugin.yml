@@ -2,7 +2,7 @@ name: MineLobby
 main: MineLobby\Loader
 version: beta
 api: [3.0.0, 4.0.0]
-author: Crafter20162017
+author: PQguanfang
 description: §eMineLobby
 
 commands:
