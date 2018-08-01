@@ -37,3 +37,30 @@ use pocketmine\utils\Textformat as Color;
 class Lobby extends PluginBase implements Listener {
     public $prefix = "§7[§9Mine§6Lobby§7]";
     public $hideall = [];
+
+    public function onJoin(PlayerJoinEvent $ev) {
+		
+		$config = new Config($this->getDataFolder() . "config.yml", Config::YAML);
+        $player = $ev->getPlayer();
+        $name = $player->getName();
+        $player->getInventory()->clearAll();
+        $ev->setJoinMessage("§7[§9+§7]" . Color::DARK_GRAY . $name);
+        $player->setFood(20);
+        $player->setHealth(20);
+        $player->setGamemode(0);
+        $player->getlevel()->addSound(new AnvilUseSound($player));
+        $player->teleport($this->getServer()->getDefaultLevel()->getSafeSpawn());
+        $player->sendMessage($config->get("Join"));
+        $player->getInventory()->setSize(9);
+        $player->getInventory()->setItem(7, Item::get(339)->setCustomName("§aT"));
+        $player->getInventory()->setItem(0, Item::get(345)->setCustomName("§eN"));
+        $player->getInventory()->setItem(2, Item::get(399)->setCustomName("§5L"));
+        $player->getInventory()->setItem(6, Item::get(388)->setCustomName("§2D"));
+        $player->getInventory()->setItem(8, Item::get(54)->setCustomName("§aG"));
+        if($player->hasPermission("lobby.yt")){
+            $player->getInventory()->setItem(4, Item::get(288)->setCustomName("§fFly"));
+        }else{
+            $player->getInventory()->setItem(4, Item::get(152)->setCustomName("§fFly §7[§6Premium§7]"));
+        }
+        $player->getInventory()->setItem(1, Item::get(369)->setCustomName("§eEMM §8[§cOff§8]"));
+    }
