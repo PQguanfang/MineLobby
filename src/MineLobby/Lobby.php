@@ -64,30 +64,30 @@ class Lobby extends PluginBase implements Listener {
 	}
     }
 	
-	public function onBreak(BlockBreakEvent $ev) {
+    public function onBreak(BlockBreakEvent $ev) {
 		
         $player = $ev->getPlayer();
         $ev->setCancelled(true);
     }
 
-	public function onPlace(BlockPlaceEvent $ev) {
+    public function onPlace(BlockPlaceEvent $ev) {
         $player = $ev->getPlayer();
         $ev->setCancelled(true);
     }
 	
-        public function Hunger(PlayerExhaustEvent $ev) {
+    public function Hunger(PlayerExhaustEvent $ev) {
         $ev->setCancelled(true);
     }
 	
-        public function ItemMove(PlayerDropItemEvent $ev){
+    public function ItemMove(PlayerDropItemEvent $ev){
         $ev->setCancelled(true);
     }
 	
-        public function onConsume(PlayerItemConsumeEvent $ev){
+    public function onConsume(PlayerItemConsumeEvent $ev){
         $ev->setCancelled(true);
     }
-
-	public function onDamage(EntityDamageEvent $ev){
+	
+    public function onDamage(EntityDamageEvent $ev){
         if($ev->getCause() === EntityDamageEvent::CAUSE_FALL){
             $ev->setCancelled(true);
         }
