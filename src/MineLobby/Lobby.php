@@ -1,6 +1,6 @@
 <?php
 
-namespace Lobby;
+namespace MineLobby;
 
 use pocketmine\plugin\PluginBase;
 use pocketmine\event\Listener;
@@ -35,7 +35,6 @@ use pocketmine\level\sound\EndermanTeleportSound;
 use pocketmine\utils\Textformat as Color;
 
 class Lobby extends PluginBase implements Listener {
-    public $prefix = "§7[§9Mine§6Lobby§7]";
     public $hideall = [];
 
     public function onJoin(PlayerJoinEvent $ev) {
@@ -51,21 +50,45 @@ class Lobby extends PluginBase implements Listener {
         $player->teleport($this->getServer()->getDefaultLevel()->getSafeSpawn());
         $player->sendMessage($config->get("Join"));
         $player->getInventory()->setSize(9);
-        $player->getInventory()->setItem(7, Item::get(339)->setCustomName("§aT"));
-        $player->getInventory()->setItem(0, Item::get(345)->setCustomName("§eN"));
-        $player->getInventory()->setItem(2, Item::get(399)->setCustomName("§5L"));
-        $player->getInventory()->setItem(6, Item::get(388)->setCustomName("§2D"));
-        $player->getInventory()->setItem(8, Item::get(54)->setCustomName("§aG"));
+        $player->getInventory()->setItem(7, Item::get(339)->setCustomName("§a选择玩法"));
+        $player->getInventory()->setItem(0, Item::get(345)->setCustomName("§e切换大厅"));
+        $player->getInventory()->setItem(2, Item::get(399)->setCustomName("§5个性效果"));
+        $player->getInventory()->setItem(6, Item::get(388)->setCustomName("§2大厅玩具"));
+        $player->getInventory()->setItem(8, Item::get(54)->setCustomName("§a活动"));
         if($player->hasPermission("lobby.yt")){
-            $player->getInventory()->setItem(4, Item::get(288)->setCustomName("§fFly"));
+            $player->getInventory()->setItem(4, Item::get(288)->setCustomName("§f开启/关闭飞行"));
+	    $player->getInventory()->setItem(1, Item::get(369)->setCustomName("§e隐藏/显示玩家"));
         }else{
-            $player->getInventory()->setItem(4, Item::get(152)->setCustomName("§fFly §7[§6Premium§7]"));
-        }
-        $player->getInventory()->setItem(1, Item::get(369)->setCustomName("§eEMM §8[§cOff§8]"));
+            $player->getInventory()->setItem(4, Item::get(152)->setCustomName("§f开启/关闭飞行 §7[§6VIP§7]"));
+            $player->getInventory()->setItem(1, Item::get(369)->setCustomName("§e隐藏/显示玩家 §8[§6VIP§8]"));
+	}
     }
 	
 	public function onBreak(BlockBreakEvent $ev) {
 		
         $player = $ev->getPlayer();
         $ev->setCancelled(true);
+    }
+
+	public function onPlace(BlockPlaceEvent $ev) {
+        $player = $ev->getPlayer();
+        $ev->setCancelled(true);
+    }
+	
+        public function Hunger(PlayerExhaustEvent $ev) {
+        $ev->setCancelled(true);
+    }
+	
+        public function ItemMove(PlayerDropItemEvent $ev){
+        $ev->setCancelled(true);
+    }
+	
+        public function onConsume(PlayerItemConsumeEvent $ev){
+        $ev->setCancelled(true);
+    }
+
+	public function onDamage(EntityDamageEvent $ev){
+        if($ev->getCause() === EntityDamageEvent::CAUSE_FALL){
+            $ev->setCancelled(true);
+        }
     }
